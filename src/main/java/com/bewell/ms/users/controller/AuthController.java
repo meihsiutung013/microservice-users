@@ -2,7 +2,6 @@ package com.bewell.ms.users.controller;
 
 import com.bewell.ms.users.dto.LoginDto;
 import com.bewell.ms.users.dto.LoginResponse;
-import com.bewell.ms.users.dto.RegisterDto;
 import com.bewell.ms.users.entity.User;
 import com.bewell.ms.users.service.AuthService;
 import com.bewell.ms.users.service.JwtService;
@@ -21,13 +20,6 @@ public class AuthController {
 
     private final JwtService jwtService;
     private final AuthService authService;
-
-
-    @PostMapping("/signup")
-    public ResponseEntity<User> register(@Valid @RequestBody RegisterDto registerDto) {
-        User registeredUser = authService.signup(registerDto);
-        return ResponseEntity.ok(registeredUser);
-    }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@Valid @RequestBody LoginDto loginDto) {

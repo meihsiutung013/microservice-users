@@ -73,3 +73,7 @@ The custom authentication is ready, and the remaining thing is to define what cr
 * The CORS configuration must allow only POST and GET requests.
 
 In the package `config`, create a file `SecurityConfiguration.java`.
+
+## Credits
+
+* Eric Cabrel TIOGO, [Implement JWT authentication in a Spring Boot 3 application](https://blog.tericcabrel.com/jwt-authentication-springboot-spring-security/)

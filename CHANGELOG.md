@@ -35,3 +35,19 @@ The secret key must be an HMAC hash string of 256 bits; otherwise, the token gen
 
 The token expiration time is expressed in milliseconds, so remember if your token expires too soon.
 
+### Override the security configuration
+
+By default, the HTTP basic authentication, but we want to override it to perform the:
+
+* Perform the authentication by finding the user in our database.
+* Generate a JWT token when the authentication succeeds.
+
+To override the implementation, let's create a package `config`, add the file `AppConfiguration.java`.
+
+The `userDetailsService()` defines how to retrieve the user using the `UserRepository` that is injected.
+
+The `passwordEncoder()` creates an instance of the `BCryptPasswordEncoder()` used to encode the plain user password.
+
+The `authenticationProvider()` sets the new strategy to perform the authentication.
+
+If you re-run your application at this step, you will not see the password generated in the console as before. We have successfully overridden the authentication method.

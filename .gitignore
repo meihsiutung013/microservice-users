@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 .git/
 .mvn/
+CHANGELOG.md
 
 ### STS ###
 .apt_generated

@@ -1,6 +1,6 @@
-package com.bewell.ms.users.repositories;
+package com.bewell.ms.users.repository;
 
-import com.bewell.ms.users.entities.User;
+import com.bewell.ms.users.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

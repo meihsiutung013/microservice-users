@@ -1,6 +1,5 @@
-package com.bewell.ms.users.dtos;
+package com.bewell.ms.users.dto;
 
-import com.bewell.ms.users.entities.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,15 +33,4 @@ public class RegisterDto {
 
     @NotBlank(message = "The gender is required.")
     private String gender;
-
-    public User toUser() {
-        return User.builder()
-                .email(email)
-                .password(password)
-                .firstName(firstName)
-                .lastName(lastName)
-                .birthDate(birthDate)
-                .gender(gender)
-                .build();
-    }
 }

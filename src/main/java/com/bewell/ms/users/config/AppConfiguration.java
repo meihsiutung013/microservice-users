@@ -1,6 +1,6 @@
 package com.bewell.ms.users.config;
 
-import com.bewell.ms.users.repositories.UserRepository;
+import com.bewell.ms.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

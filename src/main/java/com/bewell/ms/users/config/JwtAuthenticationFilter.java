@@ -1,6 +1,6 @@
 package com.bewell.ms.users.config;
 
-import com.bewell.ms.users.services.JwtService;
+import com.bewell.ms.users.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

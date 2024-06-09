@@ -1,4 +1,4 @@
-package com.bewell.ms.users.entities;
+package com.bewell.ms.users.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

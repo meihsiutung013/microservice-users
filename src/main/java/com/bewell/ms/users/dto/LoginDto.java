@@ -1,4 +1,4 @@
-package com.bewell.ms.users.dtos;
+package com.bewell.ms.users.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

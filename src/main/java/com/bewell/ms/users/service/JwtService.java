@@ -1,4 +1,4 @@
-package com.bewell.ms.users.services;
+package com.bewell.ms.users.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

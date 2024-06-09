@@ -35,6 +35,11 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "birth_date")
+    private Date birthDate;
+
+    private String gender;
+
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
     private Date createdAt;

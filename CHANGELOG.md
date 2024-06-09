@@ -60,3 +60,16 @@ For every request, we want to retrieve the JWT token in the header "Authorizatio
 * If the token is valid, extract the username, find the related user in the database, and set it in the authentication context so you can access it in any application layer.
 
 In the package `config`, create a file `JwtAuthenticationFilter.java`.
+
+## Configure the application requester filter
+
+The custom authentication is ready, and the remaining thing is to define what criteria an incoming request must match before being forwarded to application middleware. We want the following criteria:
+
+* There is no need to provide the CSRF token because we will use it.
+* The request URL path matching `/auth/signup` and `/auth/login` doesn't require authentication.
+* Any other request URL path must be authenticated.
+* The request is stateless, meaning every request must be treated as a new one, even if it comes from the same client or has been received earlier.
+* Must use the custom authentication provider, and they must be executed before the authentication middleware.
+* The CORS configuration must allow only POST and GET requests.
+
+In the package `config`, create a file `SecurityConfiguration.java`.

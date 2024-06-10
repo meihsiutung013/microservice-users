@@ -8,20 +8,17 @@ import com.bewell.ms.users.service.JwtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/auth")
+@RequestMapping("/api/auths")
 public class AuthController {
 
     private final JwtService jwtService;
     private final AuthService authService;
 
-    @PostMapping("/login")
+    @PostMapping
     public ResponseEntity<LoginResponse> authenticate(@Valid @RequestBody LoginDto loginDto) {
         User authenticatedUser = authService.authenticate(loginDto);
         String jwtToken = jwtService.generateToken(authenticatedUser);

@@ -46,5 +46,11 @@ public class DatabaseSeeder implements ApplicationListener<ContextRefreshedEvent
             User user = User.builder().firstName("admin").lastName("admin").email("admin@gmail.com").password(passwordEncoder.encode("12345678")).role(adminRole.orElse(null)).build();
             userRepository.save(user);
         }
+
+        Optional<Role> userRole = roleRepository.findByName(RoleEnum.USER);
+        if (userRole.isPresent()) {
+            User user = User.builder().firstName("user").lastName("user").email("user@gmail.com").password(passwordEncoder.encode("12345678")).role(userRole.orElse(null)).build();
+            userRepository.save(user);
+        }
     }
 }

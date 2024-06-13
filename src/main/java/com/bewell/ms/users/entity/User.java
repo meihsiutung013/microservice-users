@@ -41,7 +41,7 @@ public class User implements UserDetails {
 
     private String gender;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
 

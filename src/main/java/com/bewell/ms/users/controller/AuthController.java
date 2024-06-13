@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/auths")
+@RequestMapping("/api/sessions")
 public class AuthController {
 
     private final JwtService jwtService;

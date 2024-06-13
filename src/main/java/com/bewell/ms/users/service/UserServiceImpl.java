@@ -9,9 +9,6 @@ import com.bewell.ms.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,12 +20,12 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> allUsers() {
-        return new ArrayList<>(userRepository.findAll());
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     @Override
-    public User signup(RegisterDto input) {
+    public User register(RegisterDto input) {
 
         Optional<Role> userRole = roleRepository.findByName(RoleEnum.USER);
 

@@ -6,15 +6,14 @@ spring:
     username: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       # Hibernate ddl auto (create, create-drop, validate, update)
       ddl-auto: create-drop
 
-security:
-  jwt:
-    secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
-    expiration-time: 3600000 # 1 hour
+jwt:
+  secret-key: 210d3d27605d0ee737952294265400a7cba109746afacd84b9cb0139bf6b7e3a
+  expiration-time: 3600000 # 1 hour
 
 server:
   port: 8081

@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(input.getPassword()))
                 .firstName(input.getFirstName())
                 .lastName(input.getLastName())
-                .birthDate(input.getBirthDate())
                 .gender(input.getGender())
                 .role(userRole.get())
                 .build();

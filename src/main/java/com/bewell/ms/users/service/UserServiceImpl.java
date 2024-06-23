@@ -71,6 +71,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean deleteUser(Integer userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            userRepository.delete(user);
+            return userRepository.existsById(userId);
+        }
+        return null;
+    }
+
+    @Override
     public Boolean verifyCurrentUser(Integer userId) {
         if (userId != null) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

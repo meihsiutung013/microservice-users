@@ -59,6 +59,19 @@ public class UserController {
         return ResponseEntity.status(httpStatus).build();
     }
 
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteUser(
+            @PathVariable Integer userId
+    ) {
+        HttpStatus httpStatus = validateCurrentUser(userId);
+        if (httpStatus.equals(HttpStatus.OK)) {
+            if (userService.deleteUser(userId)) {
+                return ResponseEntity.ok("User deleted.");
+            }
+        }
+        return ResponseEntity.status(httpStatus).build();
+    }
+
     private HttpStatus validateCurrentUser(Integer userId) {
         Boolean isAuthorized = userService.verifyCurrentUser(userId);
         if (isAuthorized != null) {

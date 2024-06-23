@@ -1,5 +1,7 @@
 package com.bewell.ms.users.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,6 +35,8 @@ public class User implements UserDetails {
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
+    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     private String password;
 

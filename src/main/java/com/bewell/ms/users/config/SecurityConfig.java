@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,6 +28,7 @@ public class SecurityConfig {
     private String port;
 
     private final AuthenticationProvider authenticationProvider;
+    private final AuthenticationFilter AuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,11 +36,10 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/sessions/**").permitAll()
-                        .requestMatchers("/api/users").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
-                .authenticationProvider(authenticationProvider);
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(AuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -49,7 +50,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of("http://localhost:" + port));
-        configuration.setAllowedMethods(List.of("GET", "POST"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

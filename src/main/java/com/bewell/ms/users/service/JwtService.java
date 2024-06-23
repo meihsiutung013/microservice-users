@@ -1,6 +1,7 @@
 package com.bewell.ms.users.service;
 
 import com.bewell.ms.users.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -8,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 import java.util.Date;
 import java.util.Map;
+import java.util.function.Function;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +25,15 @@ public class JwtService {
 
     @Value("${jwt.expiration-time}")
     private long expirationTime;
+
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
 
     public String generateToken(UserDetails userDetails) {
         User user = (User) userDetails;
@@ -46,6 +57,15 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     private Key getSignInKey() {

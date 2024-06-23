@@ -5,11 +5,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/ms-users
     username: postgres
     driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
   jpa:
     show-sql: false
     hibernate:
-      # Hibernate ddl auto (create, create-drop, validate, update)
       ddl-auto: create-drop
+    defer-datasource-initialization: true
 
 jwt:
   secret-key: 210d3d27605d0ee737952294265400a7cba109746afacd84b9cb0139bf6b7e3a

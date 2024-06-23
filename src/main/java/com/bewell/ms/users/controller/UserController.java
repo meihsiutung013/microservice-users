@@ -30,6 +30,12 @@ public class UserController {
         return ResponseEntity.ok(registeredUser);
     }
 
+    @GetMapping("/current")
+    public Integer getCurrentUserId() {
+        User user = userService.getCurrentUser();
+        return user == null ? null : user.getId();
+    }
+
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(
             @PathVariable Integer userId

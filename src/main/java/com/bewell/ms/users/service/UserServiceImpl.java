@@ -81,15 +81,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return getUserByEmail(userDetails.getUsername());
+        }
+        return null;
+    }
+
+    @Override
     public Boolean verifyCurrentUser(Integer userId) {
         if (userId != null) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (!(authentication instanceof AnonymousAuthenticationToken)) {
-                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-                User user = getUserByEmail(userDetails.getUsername());
-                if (user != null) {
-                    return Objects.equals(user.getId(), userId) || user.getRole().getName().equals(RoleEnum.ADMIN);
-                }
+            User user = getCurrentUser();
+            if (user != null) {
+                return Objects.equals(user.getId(), userId) || user.getRole().getName().equals(RoleEnum.ADMIN);
             }
         }
         return null;

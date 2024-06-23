@@ -17,4 +17,6 @@ public interface UserService {
     Boolean verifyCurrentUser(Integer id);
 
     Boolean deleteUser(Integer id);
+
+    User getCurrentUser();
 }

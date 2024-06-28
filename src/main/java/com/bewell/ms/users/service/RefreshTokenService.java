@@ -26,7 +26,7 @@ public class RefreshTokenService {
             RefreshToken refreshToken = RefreshToken.builder()
                     .user(user.get())
                     .token(UUID.randomUUID().toString())
-                    .expiration(new Date(System.currentTimeMillis() + (60 * 60 * 1000 * 6)))
+                    .expiration(new Date(System.currentTimeMillis() + (60 * 60 * 1000 * 6))) // 6 hours
                     .build();
             return refreshTokenRepository.save(refreshToken);
         }
@@ -35,6 +35,14 @@ public class RefreshTokenService {
 
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);
+    }
+
+    public Optional<RefreshToken> findByUserId(Integer userId) {
+        return refreshTokenRepository.findByUserId(userId);
+    }
+
+    public void delete(RefreshToken refreshToken) {
+        refreshTokenRepository.delete(refreshToken);
     }
 
     public RefreshToken verifyExpiration(RefreshToken token) {
